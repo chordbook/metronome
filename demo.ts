@@ -1,21 +1,16 @@
 import { createMetronome } from "./src"
 
 const tempoEl = document.getElementById("tempo")! as HTMLInputElement
-const canvas = document.querySelector('canvas')! as HTMLCanvasElement
-const ctx = canvas.getContext('2d')!
-ctx.strokeStyle = "#ffffff";
-ctx.lineWidth = 2;
+const visualizerEl = document.getElementById("visualizer")! as HTMLInputElement
 
 let metronome;
 
 function onBeat(note) {
-  var x = Math.floor(canvas.width / 18);
-  ctx.clearRect(0, 0, canvas.width, canvas.height);
-  for (var i = 0; i < 16; i++) {
-    ctx.fillStyle = (note == i) ?
-      ((note % 4 === 0) ? "red" : "blue") : "gray";
-    ctx.fillRect(x * (i + 1), x, x / 2, x / 2);
-  }
+  if (note % 4 !== 0) return // ignore non-quarter notes for now
+  const quarter = note / 4
+
+  visualizerEl.querySelector('.active')?.classList.remove('active')
+  visualizerEl.children[quarter].classList.add('active')
 }
 
 document.getElementById("start")?.addEventListener("click", () => {
