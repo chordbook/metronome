@@ -2,7 +2,7 @@
 
 A web-based metronome.
 
-<h3 align="center">🎸 <a href="https://chordbook.github.io/metronome/">View Demo</a> 🪕</h3>
+<h3 align="center">🥁 <a href="https://chordbook.github.io/metronome/">View Demo</a> 🪘</h3>
 
 ### Features
 
