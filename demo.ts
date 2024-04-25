@@ -1,4 +1,13 @@
 import { createMetronome } from "./src"
+import { sync } from "./src/clock.ts"
+
+async function doSync() {
+  const offset = await sync()
+  document.getElementById('offset')!.innerText = offset.toString()
+  setTimeout(doSync, 5000)
+}
+
+setTimeout(doSync(), 1000)
 
 const tempoEl = document.getElementById("tempo")! as HTMLInputElement
 const visualizerEl = document.getElementById("visualizer")! as HTMLInputElement

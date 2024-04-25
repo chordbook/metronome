@@ -1,4 +1,5 @@
 import { setInterval, clearInterval } from "./timers"
+import { now } from "./clock"
 
 export interface Beat {
   note: number
@@ -62,7 +63,7 @@ export function createMetronome(config: MetronomeConfig = {}) {
   //
   // note = 0 - 15 (16th notes)
   function nextTime(note: number) {
-    const offset = (Date.now() / 1000) % secondsPerBar
+    const offset = (now() / 1000) % secondsPerBar
     return (secondsPerBar + (note * secondsPerNote) - offset) % secondsPerBar
   }
 
