@@ -60,7 +60,7 @@ export function createMetronome(config: MetronomeConfig = {}) {
   // duration of 16th note in seconds
   const secondsPerNote = 60 / config.tempo! / 4
 
-  // Returns the next time that the given not can be played. Given synchronized clocks, any metronome
+  // Returns the next time that the given note can be played. Given synchronized clocks, any metronome
   // playing the same tempo will play the same note of a measure at the same time.
   //
   // note = 0 - 15 (16th notes)
