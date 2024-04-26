@@ -1,6 +1,8 @@
 import { setInterval, clearInterval } from "./timers"
 import { now } from "./clock"
 
+export { sync as syncClock } from "./clock"
+
 export interface Beat {
   note: number
   time: number
