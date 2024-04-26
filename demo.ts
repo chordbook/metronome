@@ -17,11 +17,13 @@ function onBeat(note) {
   visualizerEl.children[quarter].classList.add('active')
 }
 
-document.getElementById("start")?.addEventListener("click", () => {
-  metronome = createMetronome({ tempo: Number(tempoEl.value), onBeat })
-  metronome.start()
-})
-document.getElementById("stop")?.addEventListener("click", () => {
-  metronome?.stop()
-  metronome = undefined
+document.getElementById("enabled")?.addEventListener("change", (e) => {
+  if (e.target?.checked) {
+    metronome = createMetronome({ tempo: Number(tempoEl.value), onBeat })
+    metronome.start()
+  } else {
+    metronome?.stop()
+    onBeat(0)
+    metronome = undefined
+  }
 })

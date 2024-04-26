@@ -1,125 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@chordbook/metronome</title>
-    <style>
-      body {
-        margin: 0;
-        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      }
 
-      main {
-        display: flex;
-        flex-direction: column;
-        height: 100vh;
-      }
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="light dark" />
+  <link rel="stylesheet" href="./demo.css" />
+  <title>@chordbook/metronome</title>
+</head>
 
-      header {
-        color: white;
-        background: darkslateblue;
-        padding: 1rem 2rem;
-        display: flex;
-      }
+<body>
+  <div class="container mx-auto p-4 max-w-4xl">
 
-      header a {
-        color: inherit;
-      }
+    <header>
+      <nav class="navbar">
+        <div class="navbar-end">
+          <a class="contrast" href="https://github.com/chordbook/metronome" style="margin-left: auto;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" class="bi bi-github"
+              viewBox="0 0 16 16">
+              <path
+                d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8" />
+            </svg>
+          </a>
+        </div>
+      </nav>
+    </header>
 
-      h1 {
-        font-size: 1.5rem;
-        margin: 0;
-      }
-
-      #metronome {
-        display: flex;
-        flex-direction: column;
-        gap: 2rem;
-        flex: 1;
-        position: relative;
-        align-items: center;
-        justify-content: center;
-      }
-
-      #controls {
-        display: flex;
-        flex-direction: row;
-        gap: 2rem;
-      }
-
-      button, input {
-        font-size: 1rem;
-      }
-
-      #visualizer {
-        display: flex;
-        flex-direction: row;
-        gap: 1rem;
-      }
-
-      #visualizer > * {
-        width: 1rem;
-        height: 1rem;
-        border-radius: 1rem;
-        background: lightgray;
-        transition: background-color box-shadow 2s ease-in-out;
-        box-shadow: inset 0 0.1rem 0.5rem rgba(0, 0, 0, 0.5);
-        background: var(--off-color);
-      }
-
-      #visualizer .active {
-        background: var(--on-color);
-        box-shadow:
-          inset 0 0.1rem 0.5rem var(--off-color),
-          0 0 0.1rem rgba(0, 0, 0, 0.3),
-          0 0 0.75rem var(--on-color);
-        transition-duration: 0.1s;
-      }
-
-      #visualizer .green {
-        --off-color: #3d9900;
-        --on-color: #66FF00;
-      }
-
-      #visualizer .orange {
-        --off-color: #b38400;
-        --on-color: #FFD700;
-      }
-    </style>
-  </head>
-  <body>
     <main>
-      <header>
-        <h1><a href="https://github.com/chordbook/metronome">@chordbook/metronome</a></h1>
-        <a href="https://github.com/chordbook/metronome" style="margin-left: auto;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
-            <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27s1.36.09 2 .27c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8"/>
-          </svg>
-        </a>
-      </header>
-      <div id="metronome">
-        <div id="controls">
-          <div>
-            <button id="start">Start</button>
-            <button id="stop">Stop</button>
+      <div class="hero min-h-[50vh] my-8">
+        <div class="hero-content flex-col lg:flex-row p-5 md:p-10 gap-5 md:gap-10">
+          <div class="text-center lg:text-left max-w-[30rem] flex flex-col gap-4">
+            <a href="https://github.com/chordbook/metronome" class="link-primary font-bold text-2xl">@chordbook/metronome</a>
+            <h1 class="text-4xl font-bold text-white">
+              A clock-synchronized universal metronome.
+            </h1>
+            <p class="text-xl">
+              Everyone in the room—or anywhere in the world—playing a given tempo together without manual synchronization.
+            </p>
+
+            <p class=""><span class="text-accent">Try it!</span> Open this page on multiple devices and hit play.</p>
           </div>
-          <div id="tempoBox">
-            Tempo:
-            <input id="tempo" type="number" min="30.0" max="160.0" step="1" value="120" style="width: 3rem;">
+          <div class="card max-w-xs">
+            <div class="flex flex-col items-center gap-6">
+              <div class="flex flex-col items-center gap-1">
+                <label for="tempo" class="text-secondary uppercase text-sm font-semibold">Tempo</label>
+                <input id="tempo" class="input input-bordered input-lg w-32 text-center text-4xl font-bold" type="number" min="30" max="400" step="1" value="120">
+                <span class="text-sm uppercase font-bold">bpm</span>
+              </div>
+
+              <div id="visualizer" class="flex flex-row gap-5">
+                <div class="green"></div>
+                <div class="orange"></div>
+                <div class="orange"></div>
+                <div class="orange"></div>
+              </div>
+
+              <label class="swap">
+                <input id="enabled" type="checkbox" />
+                <span class="swap-off btn btn-circle btn-primary">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24" stroke-width="1.5"
+                    stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                      d="M5.25 5.653c0-.856.917-1.398 1.667-.986l11.54 6.347a1.125 1.125 0 0 1 0 1.972l-11.54 6.347a1.125 1.125 0 0 1-1.667-.986V5.653Z" />
+                  </svg>
+                </span>
+                <span class="swap-on btn btn-primary btn-circle">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                    <path fill-rule="evenodd"
+                      d="M6.75 5.25a.75.75 0 0 1 .75-.75H9a.75.75 0 0 1 .75.75v13.5a.75.75 0 0 1-.75.75H7.5a.75.75 0 0 1-.75-.75V5.25Zm7.5 0A.75.75 0 0 1 15 4.5h1.5a.75.75 0 0 1 .75.75v13.5a.75.75 0 0 1-.75.75H15a.75.75 0 0 1-.75-.75V5.25Z"
+                      clip-rule="evenodd" />
+                  </svg>
+                </span>
+              </label>
+
+              <div style="font-size:0.7rem;">Offset: <span id="offset">0</span></div>
+            </div>
           </div>
         </div>
-
-        <div id="visualizer">
-          <div class="green"></div>
-          <div class="orange"></div>
-          <div class="orange"></div>
-          <div class="orange"></div>
-        </div>
-
-        <div style="font-size:0.7rem;">Offset: <span id="offset">0</span></div>
       </div>
     </main>
-    <script type="module" src="./demo.ts"></script>
-  </body>
+  </div>
+  <script type="module" src="./demo.ts"></script>
+</body>
 </html>
