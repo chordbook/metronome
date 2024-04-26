@@ -55,10 +55,18 @@ export function createMetronome(config: MetronomeConfig = {}) {
   let interval: number | undefined;
 
   // Time in seconds that a bar lasts
-  const secondsPerBar = 60 / config.tempo! * config.meter![0]
+  let secondsPerBar: number;
 
   // duration of 16th note in seconds
-  const secondsPerNote = 60 / config.tempo! / 4
+  let secondsPerNote: number;
+
+  function setTempo(tempo: number) {
+    config.tempo = tempo
+    secondsPerBar = 60 / config.tempo! * config.meter![0]
+    secondsPerNote = 60 / config.tempo! / 4
+  }
+
+  setTempo(config.tempo!)
 
   // Returns the next time that the given note can be played. Given synchronized clocks, any metronome
   // playing the same tempo will play the same note of a measure at the same time.
@@ -159,5 +167,5 @@ export function createMetronome(config: MetronomeConfig = {}) {
     requestAnimationFrame(draw);
   }
 
-  return { start, stop }
+  return { start, stop, setTempo }
 }

@@ -18,7 +18,7 @@ function onBeat(note) {
 }
 
 document.getElementById("enabled")?.addEventListener("change", (e) => {
-  if (e.target?.checked) {
+  if ((e.target as HTMLInputElement)?.checked) {
     metronome = createMetronome({ tempo: Number(tempoEl.value), onBeat })
     metronome.start()
   } else {
@@ -26,4 +26,8 @@ document.getElementById("enabled")?.addEventListener("change", (e) => {
     onBeat(0)
     metronome = undefined
   }
+})
+
+tempoEl.addEventListener("input", () => {
+  metronome?.setTempo(Number(tempoEl.value))
 })
