@@ -2,6 +2,7 @@ import { setInterval, clearInterval } from "./timers"
 import { NetworkClock } from "./Clock"
 import { Meter } from "./Meter"
 import { Beat, Conductor } from "./Conductor"
+import iosunmute from 'iosunmute'
 
 const clock = new NetworkClock()
 
@@ -16,10 +17,12 @@ const defaultConfig: MetronomeConfig = {
   meter: [4, 4],
 }
 
+const audioContext: AudioContext = new AudioContext()
+iosunmute(audioContext)
+
 export function createMetronome(config: MetronomeConfig = {}) {
   config = { ...defaultConfig, ...config }
 
-  const audioContext: AudioContext = new AudioContext()
 
   // How frequently to call scheduling function (in ms)
   const lookahead = 25;
